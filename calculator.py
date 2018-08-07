@@ -12,13 +12,13 @@ Entry.grid(row=0,column=0,columnspan=4)
 
 # ROW 1 --------------------------------------------------------------
 
-b_AC=tkinter.Button(calculator,text="AC",borderwidth=1,font=("Arial",20),)
+b_AC=tkinter.Button(calculator,text="AC",borderwidth=1,font=("Arial",20),command=lambda : clear() )
 b_AC.grid(row=1,column=0,sticky="NWNESWSE",)
 
-b_C=tkinter.Button(calculator,text="C",borderwidth=1,font=("Arial",20))
+b_C=tkinter.Button(calculator,text="C",borderwidth=1,font=("Arial",20),command=lambda: appendToDisplay("C"))
 b_C.grid(row=1,column=1,sticky="NWNESWSE")
 
-b_X=tkinter.Button(calculator,text="X",borderwidth=1,font=("Arial",20))
+b_X=tkinter.Button(calculator,text="X",borderwidth=1,font=("Arial",20),command=lambda: appendToDisplay("X"))
 b_X.grid(row=1,column=2,sticky="NWNESWSE")
 
 b_divide=tkinter.Button(calculator,text="/",borderwidth=1,font=("Arial",20),command=lambda: appendToDisplay("/"))
@@ -75,7 +75,7 @@ b_plus.grid(row=4,column=3,sticky="NWNESWSE")
 b_0=tkinter.Button(calculator,text="0",font=("Arial",20),borderwidth= 1,command=lambda: appendToDisplay("0"))
 b_0.grid(row=5,column=0,columnspan=3,sticky="NWNESWSE")
 
-b_equal=tkinter.Button(calculator,text="=",font=("Arial",20),borderwidth=1)
+b_equal=tkinter.Button(calculator,text="=",font=("Arial",20),borderwidth=1,command=lambda: calculate_exp())
 b_equal.grid(row=5,column=3,sticky="NSNESWSE")
 
 
@@ -96,6 +96,20 @@ def appendToDisplay(text):
 def replaceText(text):
     Entry.delete(0)
     Entry.insert(0, text)
+
+
+def clear():
+    Entry.delete("0")
+
+
+def calculate_exp():
+    expression=Entry.get()
+    result=eval(expression)
+    Entry.delete("0")
+    Entry.delete("0")
+    Entry.delete("0")
+    Entry.insert(0,result)
+    print(result)
 
 
 calculator.mainloop()
