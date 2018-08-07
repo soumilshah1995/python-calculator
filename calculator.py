@@ -105,11 +105,15 @@ def clear():
 def calculate_exp():
     expression=Entry.get()
     result=eval(expression)
-    Entry.delete("0")
-    Entry.delete("0")
-    Entry.delete("0")
-    Entry.insert(0,result)
-    print(result)
+
+    try:
+        result = eval(expression)
+        Entry.delete("0")
+        Entry.delete("0")
+        Entry.delete("0")
+        Entry.insert(0,result)
+    except:
+        print("Invalid Input ")
 
 
 calculator.mainloop()
